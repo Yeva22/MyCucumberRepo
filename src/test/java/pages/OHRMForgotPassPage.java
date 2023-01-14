@@ -3,10 +3,12 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import step_def.OHRMForgotPassSteps;
 import utils.Driver;
 
-public class ForgotPassOHRMPage {
-    public ForgotPassOHRMPage(){
+public class OHRMForgotPassPage {
+    OHRMForgotPassSteps ohrmForgotPassSteps = new OHRMForgotPassSteps();
+    public OHRMForgotPassPage(){
 
         PageFactory.initElements(Driver.getDriver(),this);
 

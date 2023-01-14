@@ -1,19 +1,22 @@
 package step_def;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import pages.LoginSBPage;
+import pages.WebOrdersSBPage;
 import utils.Driver;
 
 //Agile Story: When user is on the login page of SmartBear app user should
 //  be able to log in using correct test data
 
-public class SBPosLoginSteps {
+public class SBLoginSteps {
 
     LoginSBPage loginSBPage = new LoginSBPage();
-
+    WebOrdersSBPage webOrdersSBPage = new WebOrdersSBPage();
+    Faker faker = new Faker();
     @When("User is on SmartBear login page")
     public void user_is_on_smart_bear_login_page() {
         Driver.getDriver().get("http://secure.smartbearsoftware.com/samples/testcomplete12/WebOrders/login.aspx");
@@ -40,6 +43,18 @@ public class SBPosLoginSteps {
         Assert.assertEquals(expectedMsg,actualMsg);
 
     }
+    @When("User enters correct username")
+    public void user_enters_correct_username() {
+        loginSBPage.username.sendKeys(faker.internet().password());
+    }
+    @When("User enters incorrect password")
+    public void user_enters_incorrect_password() {
+        loginSBPage.password.sendKeys("tested");
+    }
+       @Then("User should see the error message displayed on the page")
+    public void user_should_see_the_error_message_displayed_on_the_page() {
+        loginSBPage.errorMsg.isDisplayed();
 
+    }
 
 }
